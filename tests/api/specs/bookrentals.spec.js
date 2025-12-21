@@ -4,7 +4,7 @@ import { BookrentalsService } from '../services/bookrentalsService.js';
 import { BooksService } from '../services/booksService.js';
 import { BookFactory } from '../factories/bookFactory.js';
 import { UserFactory } from '../factories/userFactory.js';
-import { AuthenticationService } from '../services/autenticationService.js';
+import { AuthenticationService } from '../services/authenticationService.js';
 
 
 test.describe('Book Rentals', () => {

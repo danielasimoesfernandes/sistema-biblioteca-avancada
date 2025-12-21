@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 import { BookFactory } from '../factories/bookFactory.js';
 import { PurchasesService } from '../services/purchasesServices.js';
-import { AuthenticationService } from '../services/autenticationService.js';
+import { AuthenticationService } from '../services/authenticationService.js';
 import { BooksService } from '../services/booksService.js';
 import { BookrentalsService } from '../services/bookrentalsService.js';
 

@@ -2,7 +2,6 @@
 import { test, expect } from '@playwright/test';
 import { BooksService } from '../services/booksService.js';
 import { BookFactory } from '../factories/bookFactory.js';
-import id from 'faker/lib/locales/id_ID/index.js';
 
 
 test.describe('Books - Listing & Searching', () => {

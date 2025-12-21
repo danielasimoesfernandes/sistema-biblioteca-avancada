@@ -1,6 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { AuthenticationService } from '../services/autenticationService.js';
+import { AuthenticationService } from '../services/authenticationService.js';
 
 
 test.describe('Autentication - Registration', () => {
