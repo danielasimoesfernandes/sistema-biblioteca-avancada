@@ -1,41 +1,38 @@
 import { base } from "@faker-js/faker"; 
 import { expect } from "@playwright/test";
 
-export class LoginPage {
+export class RegistrationPage {
     constructor(page) {
         this.page = page;
-        this.loginPageTitle = page.locator('h1', { hasText: '📚 Login' });
+        this.registrationPageTitle = page.locator('h1', { hasText: '📚 Criar Conta' });
+        this.name = page.locator('input[id = "nome"]'); 
         this.email = page.locator('input[id = "email"]'); 
         this.password = page.locator('input[id = "senha"]');
-        this.loginButton = page.locator('button[type="submit"]', { hasText: 'Entrar'}); 
-        this.registerLink = page.getByRole('link', { name: 'Registre-se' });
-    }
-
-    // Open website on the login page (which is the baseURL) 
-    async goToWebsite() {
-      await this.page.goto('/login.html');
+        this.confirmPassword = page.locator('input[id = "confirmarSenha"]'); 
+        this.registerButton = page.locator('button[type="submit"]', { hasText: 'Registrar'}); 
+        this.loginLink = page.getByRole('link', { name: 'Entrar' });
     };
 
-    // Verify that login page is open
-    async verifyLoginPage() {
-      await expect(this.loginPageTitle).toBeVisible();
-      await expect(this.page).toHaveURL(/login\.html/);
+    // Verify that registration page is open
+    async verifyRegisterPage() {
+      await expect(this.registrationPageTitle).toBeVisible();
+      await expect(this.page).toHaveURL(/registro\.html/);
    };
 
-   // Go to Register page
-   async goToRegisterPage() { 
-    await this.registerLink.click();
-   };
+   // Submit registration 
+   async registerNewUser({ name, email, password, confirmPassword }) {
+    await this.name.fill(name);
+    await this.email.fill(email);
+    await this.password.fill(password);
+    await this.confirmPassword.fill(confirmPassword);
+    await this.registerButton.click();
+  };
 
-   // Simple login with provided email and password
-   async logIn(user) {
-        await this.email.fill(user.email);
-        await this.password.fill(user.password);
-        await this.loginButton.click();
-    }
     // Log in with Admin user
     async logInAdminUser() {
+        await this.email.click();
         await this.email.fill("admin@biblioteca.com");
+        await this.password.click();
         await this.password.fill("123456");
         await this.loginButton.click();
     };
