@@ -1,256 +1,306 @@
-# 📚 Library System – Advanced Testing Version
 
-A comprehensive library management system designed specifically for Advanced Test Automation training. This project serves as a full-stack sandbox for practicing API and UI testing strategies using modern tools like Playwright, Cypress, or Selenium.
+# 📚 Advanced Library Automation
 
-***
+A comprehensive Library Management System designed specifically for advanced test automation practice, covering both API (backend) and UI (frontend) testing with Playwright.
 
-## 🎯 About the project
+This project simulates real-world application flows and is ideal for QA Engineers and developers who want hands-on experience with end-to-end testing, integration testing, and modern automation strategies using JavaScript.
 
-This environment is focused on QA Engineering and Test Automation. It provides complex real-world scenarios, including:
-* Multi-role authentication flows.
-* Dynamic data handling (CRUD operations).
-* State-dependent logic (Approvals, Stock management).
+
+
+## 🎯 About the Project
+
+This project serves as a learning and practice environment focused on **QA Engineering and Test Automation**. It provides complex real-world scenarios, including:
+* Multi-role authentication flows (Student, Staff, Admin).
+* Dynamic data handling (Full Book and User CRUD).
+* State-dependent logic (Rental Approvals & Stock Management).
 * Conditional UI rendering based on user permissions.
+## 🚀 Features Covered
 
-***
+### 🔐 Authentication & Authorization
+- **Public registration:** Account creation always as Student.
+- **Login:** Email and password authentication.
+- **User roles:**
+    - Student (type 1)
+    - Staff (type 2)
+    - Administrator (type 3)
+- **User Administration (Admin only):** Dedicated panel where admins can create, edit, and delete staff members and other admins (full CRUD).
 
-## ✨ Key Features
+### 📖 Book Management
+- **Create Book:** Title, author, number of pages, description, cover image, stock, and price.
+- **List Books:** Responsive grid with book covers and key information.
+- **Details Page:** Dedicated page for viewing detailed book information.
+- **Update / Delete:** Full edit and removal operations.
 
-### 🔐 Authentication & Role-Based Access Control (RBAC)
-- **Public Registration:** Default account creation as Student.
-- **Login:** Autenticação por email e senha.
-- **Perfis de usuário:**  
-  - Aluno (tipo 1)  
-  - Funcionário (tipo 2)  
-  - Administrador (tipo 3)
-- **Admin de Usuários:** Tela exclusiva onde o admin cria/edita/exclui funcionários e outros admins (CRUD completo).
+### 📅 Rentals (Loans)
+- **Student:**
+    - Request a rental by selecting a book by name.
+    - View a “My Rentals” list.
+- **Employee / Admin:**
+    - Rental Approval screen listing all rental requests.
+    - Approve or reject requests, with automatic stock updates.
 
-### 📖 Gerenciamento de Livros
-- **Criar Livro:** Nome, autor, páginas, descrição, imagem, estoque e preço.
-- **Listar Livros:** Grid responsivo com capa e informações principais.
-- **Detalhes:** Página dedicada para visualização de um livro.
-- **Atualizar / Deletar:** Operações completas de edição e remoção.
-
-### 📅 Arrendamentos (Empréstimos)
-- **Aluno:**  
-  - Solicitar arrendamento escolhendo o livro por nome.  
-  - Ver lista de “Meus Arrendamentos”.
-- **Funcionário/Admin:**  
-  - Tela de **Aprovação de Arrendamentos** para listar todos.  
-  - Aprovar / Rejeitar pedidos, com atualização de estoque.
-
-### 🛒 Compras
-- **Compras (Aluno):**  
-  - Tela para listar livros disponíveis e registrar compras.  
-  - Tela separada “Minhas Compras” para histórico.
-- **Compras Admin/Funcionário:**  
-  - Tela “Compras Admin” listando todas as compras.  
-  - Aprovar ou cancelar, com controle de estoque.
+### 🛒 Purchases
+- **Student Purchases:**
+    - Page to browse available books and register purchases.
+    - Separate “My Purchases” page for purchase history.
+- **Admin / Employee Purchases:**
+    - "Admin Purchases” page listing all purchases.
+    - Approve or cancel purchases, with stock control.
 
 ### 📊 Dashboard
-- **Visão Aluno:** Livros disponíveis, total de livros, quantidade de alunos.
-- **Visão Funcionário:** Arrendamentos pendentes, livros disponíveis, número de funcionários.
-- **Visão Admin:** Totais de livros/usuários e contagem de Alunos, Funcionários e Admins.
+- **Student View:** Available books, total books, number of students.
+- **Employee View:** Pending rentals, available books, number of staff members.
+- **Admin View:** Total books and users, plus counts of Students, Staff, and Admins.
 
-### ❤️ Sistema de Favoritos
-- Adicionar / remover livros dos favoritos.
-- Página “Meus Favoritos” listando apenas os livros favoritados.
+### ❤️ Favorites System
+- Add or remove books from favorites.
+- My Favorites” page displaying only favorited books.
 
-### 🎨 Interface
-- Layout responsivo (desktop, tablet, mobile).
-- Navegação consistente em todas as páginas.
-- Alertas de sucesso/erro nas principais ações.
-
-***
-
-## 🛠️ Tecnologias Utilizadas
+### 🎨 User Interface
+- Responsive layout (desktop, tablet, mobile).
+- Consistent navigation across all pages.
+- Success and error alerts for key actions.
+## 🛠️ Technologies 
 
 ### Backend
-- **Node.js** – Runtime JavaScript.
-- **Express** – Framework web.
-- **CORS** – Liberação de acesso entre origens.
-- **Swagger UI Express** + **Swagger JSDoc** – Documentação interativa da API.
+- **Node.js** – JavaScript runtime.
+- **Express** – Web framework.
+- **CORS** – Cross-origin resource sharing.
+- **Swagger UI Express** + **Swagger JSDoc** – Interactive API documentation
 
 ### Frontend
-- **HTML5** – Estrutura semântica.
-- **CSS3** – Layout com flexbox e grid.
-- **JavaScript (ES6+)** – Lógica da aplicação.
-- **Fetch API** – Requisições HTTP assíncronas.
+- **HTML5** – Semantic structure.
+- **CSS3** – Layout using Flexbox and Grid.
+- **JavaScript (ES6+)** – Application logic.
+- **Fetch API** – Asynchronous HTTP requests.
 
 ***
 
-## 📋 Pré‑requisitos
+## 📋 Requirements
 
-- Node.js 14+ (LTS recomendada).
+- Node.js 14+ (LTS recommended).
 - npm.
-- Git (para clonar o repositório).
+- Git (to clone the repository).
 
 ***
 
-## 🚀 Como Executar Localmente
+## 🚀 How to Run Locally
 
 ```bash
-git clone https://github.com/brunonf15/biblioteca-pro-max.git
-cd crud-livros-expandido
+git clone https://github.com/danielasimoesfernandes/advanced-library-automation.git
+cd advanced-library-automation
 npm install
 npm start
 ```
 
-O servidor sobe na porta **3000**.
+The app will be running at http://localhost:3000
 
-Acessos principais:
+#### Main access points
 
-- Aplicação (login): `http://localhost:3000/login.html`  
+- Application (login): `http://localhost:3000/login.html`  
 - Swagger: `http://localhost:3000/api-docs`  
-- Base da API: `http://localhost:3000`
+- API Base URL: `http://localhost:3000`
 
 ***
-
-## 📁 Estrutura do Projeto
+## 📁 Project structure 
 
 ```text
-crud-livros-expandido/
-├── package.json           # Dependências e scripts
-├── server.js              # Servidor Express e rotas da API
-├── README.md              # Este arquivo
-└── public/
-    ├── css/
-    │   └── style.css
-    ├── js/
-    │   ├── auth.js              # Autenticação no front e menu dinâmico
-    │   ├── login.js             # Lógica de login
-    │   ├── registro.js          # Registro (sempre aluno)
-    │   ├── dashboard.js         # Dashboard com visão por perfil
-    │   ├── livros.js            # CRUD de livros (UI)
-    │   ├── detalhes.js          # Página de detalhes do livro
-    │   ├── favoritos.js         # Meus favoritos
-    │   ├── arrendamentos.js     # Meus arrendamentos (aluno)
-    │   ├── aprovacoes.js        # Aprovação de arrendamentos (func/admin)
-    │   ├── compras.js           # Tela de compras (aluno)
-    │   ├── minhas-compras.js    # Histórico de compras (aluno)
-    │   ├── compras-admin.js     # Gestão de compras (func/admin)
-    │   └── admin-usuarios.js    # CRUD de usuários (admin)
-    ├── login.html
-    ├── registro.html
+advanced-library-automation/
+└── 📁.vscode
+    ├── settings.json
+└── 📁frontend-tests
+    ├── login.spec.js
+└── 📁public
+    └── 📁css
+        ├── style.css
+    └── 📁js
+        ├── admin-usuarios.js
+        ├── aprovacoes.js
+        ├── arrendamentos.js
+        ├── auth.js
+        ├── compras-admin.js
+        ├── compras.js
+        ├── dashboard.js
+        ├── detalhes.js
+        ├── favoritos.js
+        ├── livros.js
+        ├── login.js
+        ├── registro.js
+    ├── admin-usuarios.html
+    ├── app.js
+    ├── aprovacoes.html
+    ├── arrendamentos.html
+    ├── compras-admin.html
+    ├── compras.html
     ├── dashboard.html
-    ├── livros.html
     ├── detalhes.html
     ├── favoritos.html
-    ├── arrendamentos.html
-    ├── aprovacoes.html
-    ├── compras.html
-    ├── minhas-compras.html
-    └── admin-usuarios.html
+    ├── index.html
+    ├── livros.html
+    ├── login.html
+    ├── registro.html
+└── 📁test cases - apis and frontend
+    ├── Casos de Teste – Backend (API).pdf
+    ├── Casos de Teste – Frontend (UI).pdf
+    ├── Hands-on Lab_ Automação de Testes – Sistema de Biblioteca (CRE).pdf
+└── 📁tests
+    └── 📁api
+        └── 📁factories
+            ├── bookFactory.js
+            ├── userFactory.js
+        └── 📁services
+            ├── authenticationService.js
+            ├── bookrentalsService.js
+            ├── booksService.js
+            ├── favoritesServices.js
+            ├── purchasesServices.js
+            ├── statsServices.js
+            ├── usersService.js
+        └── 📁specs
+            ├── authentication.spec.js
+            ├── bookrentals.spec.js
+            ├── books.spec.js
+            ├── favorites.spec.js
+            ├── purchases.spec.js
+            ├── stats.spec.js
+            ├── users.spec.js
+    └── 📁ui
+        └── 📁pages
+            ├── adminUsersPage.js
+            ├── approvalsPage.js
+            ├── bookDetailsPage.js
+            ├── booksPage.js
+            ├── dashboardPage.js
+            ├── favoritesPage.js
+            ├── loginPage.js
+            ├── purchasesPage.js
+            ├── registrationPage.js
+            ├── rentalsPage.js
+        └── 📁specs
+            ├── adminUsers.spec.js
+            ├── books.spec.js
+            ├── dashboard.spec.js
+            ├── favorites.spec.js
+            ├── logout.spec.js
+            ├── navigationsControl.spec.js
+            ├── purchases.spec.js
+            ├── registrationLogin.spec.js
+            ├── rentals.spec.js
+├── .DS_Store
+├── notes.txt
+├── package-lock.json
+├── package.json
+├── playwright.config.js
+├── README.md
+└── server.js
 ```
-
-***
-
 ## 🔌 Endpoints da API (Resumo)
 
 ### Autenticação
 
-| Método | Endpoint     | Descrição                              |
-|--------|--------------|----------------------------------------|
-| POST   | `/registro`  | Criar usuário (aluno / func / admin)  |
-| POST   | `/login`     | Autenticar usuário                     |
+| Method | Endpoint     | Description                              |
+|--------|--------------|------------------------------------------|
+| POST   | `/registro`  | Create user (student / employee / admin) |
+| POST   | `/login`     | Authenticate user                        |
 
-### Usuários (Admin / CRUD)
+### Users (Admin / CRUD)
 
-| Método | Endpoint         | Descrição                       |
-|--------|------------------|---------------------------------|
-| GET    | `/usuarios`      | Listar usuários (sem senha)     |
-| PUT    | `/usuarios/:id`  | Atualizar nome/email/tipo       |
-| DELETE | `/usuarios/:id`  | Excluir usuário (exceto id 1)   |
+| Method | Endpoint         | Description                         |
+|--------|------------------|-------------------------------------|
+| GET    | `/usuarios`      | List users (without password)       |
+| PUT    | `/usuarios/:id`  | Update name / email / role          |
+| DELETE | `/usuarios/:id`  | Delete user (except user with id 1) |
 
-### Livros
+### Books
 
-| Método | Endpoint                  | Descrição                         |
-|--------|---------------------------|-----------------------------------|
-| GET    | `/livros`                 | Listar todos os livros            |
-| GET    | `/livros/disponiveis`     | Listar apenas com estoque > 0     |
-| GET    | `/livros/:id`             | Buscar livro por ID               |
-| POST   | `/livros`                 | Criar livro                       |
-| PUT    | `/livros/:id`             | Atualizar livro                   |
-| DELETE | `/livros/:id`             | Remover livro                     |
-| GET    | `/livros/recentes/ultimos`| Últimos 5 livros cadastrados      |
+| Method | Endpoint                  | Description                     |
+|--------|---------------------------|---------------------------------|
+| GET    | `/livros`                 | List all books                  |
+| GET    | `/livros/disponiveis`     | List only books with stock > 0  |
+| GET    | `/livros/:id`             | Get book by ID                  |
+| POST   | `/livros`                 | Create book                     |
+| PUT    | `/livros/:id`             | Update book                     |
+| DELETE | `/livros/:id`             | Delete book                     |
+| GET    | `/livros/recentes/ultimos`| Get last 5 added bookS          |
 
-### Estatísticas
+### Statistics
 
-| Método | Endpoint        | Descrição                                              |
-|--------|-----------------|--------------------------------------------------------|
-| GET    | `/estatisticas` | Totais de livros, páginas, usuários e pendências      |
+| Method | Endpoint        | Description                                           |
+|--------|-----------------|------------------------------------------------------|
+| GET    | `/estatisticas` | Totals of books, pages, users, and pending requests  |
 
-### Favoritos
+### Favorites
 
-| Método | Endpoint               | Descrição                          |
-|--------|------------------------|------------------------------------|
-| GET    | `/favoritos/:usuarioId`| Listar favoritos do usuário        |
-| POST   | `/favoritos`          | Adicionar livro aos favoritos      |
-| DELETE | `/favoritos`          | Remover livro dos favoritos        |
+| Method | Endpoint               | Description                   |
+|--------|------------------------|-------------------------------|
+| GET    | `/favoritos/:usuarioId`| List user favorites           |
+| POST   | `/favoritos`           | Add book to favorites          |
+| DELETE | `/favoritos`           | Remove book from favorites     |
 
-### Arrendamentos
+### Rentals (Loans)
 
-| Método | Endpoint                   | Descrição                                    |
-|--------|----------------------------|----------------------------------------------|
-| GET    | `/arrendamentos`          | Listar todos (para aprovação)                |
-| GET    | `/arrendamentos/me`       | Listar arrendamentos de um usuário (`usuarioId` na query) |
-| POST   | `/arrendamentos`          | Solicitar arrendamento                       |
-| PUT    | `/arrendamentos/:id/status`| Alterar status (APROVADO / REJEITADO)       |
+| Method | Endpoint                   | Description                                            |
+|--------|----------------------------|--------------------------------------------------------|
+| GET    | `/arrendamentos`           | List all rentals (for approval)                        |
+| GET    | `/arrendamentos/me`        | List rentals for a user (usuarioId as query parameter) |
+| POST   | `/arrendamentos`           | Request rental                                         |
+| PUT    | `/arrendamentos/:id/status`| Update status (APPROVED / CANCELED).                   |
 
-### Compras
+### Purchases
 
-| Método | Endpoint                 | Descrição                                        |
-|--------|--------------------------|--------------------------------------------------|
-| GET    | `/compras`              | Listar todas as compras                          |
-| GET    | `/compras/me`           | Compras de um usuário (`usuarioId` na query)     |
-| POST   | `/compras`              | Registrar compra                                 |
-| PUT    | `/compras/:id/status`   | Alterar status (APROVADA / CANCELADA)           |
-
-***
-
-## 🎓 Uso para Testes Automatizados
-
-Pensado para treinar:
-
-- **API Testing:** registro/login, CRUD de livros, arrendamentos, compras, erros de validação, estados pendente/aprovado/rejeitado.  
-- **UI Testing:** fluxos reais (login, navegação por perfis, favoritos, compras, painel admin), validação de formulários e comportamento condicional por tipo de usuário.
-
-Ferramentas sugeridas:
-
-- API: Postman, Insomnia, Rest Assured, Playwright, Cypress.  
-- UI: Selenium WebDriver, Cypress, Playwright, Puppeteer.
+| Method | Endpoint                 | Description                                              |
+|--------|--------------------------|----------------------------------------------------------|
+| GET    | `/compras`               | List all purchases                                       |
+| GET    | `/compras/me`            | List purchases for a user (usuarioId as query parameter) |
+| POST   | `/compras`               | Register purchase                                        |
+| PUT    | `/compras/:id/status`    | Update status (APPROVED / CANCELED).                     |
 
 ***
 
-## 💡 Dados de Teste
 
-Usuários iniciais:
+## 🎓 Automated Testing Usage
 
-- **Admin:**  
-  - Email: `admin@biblioteca.com`  
-  - Senha: `123456`  
-- **Funcionário:**  
-  - Email: `func@biblio.com`  
-  - Senha: `123456`  
-- **Aluno:**  
-  - Email: `aluna@teste.com`  
-  - Senha: `123456`
+This project was designed as a foundation for automated testing practice, covering both API and UI test scenarios.
+It is ideal for training and validating:
+- API Testing: user registration and login, book CRUD operations, rentals (loans), purchases, validation errors, and state transitions (pending, approved, rejected).
+- UI Testing: real user flows such as authentication, role-based navigation, favorites management, purchases, and the admin panel, including form validation and conditional behavior based on user roles.
 
-Livros iniciais:
+## 🛠 Suggested Testing Tools
+ 
+- API Testing: Postman, Insomnia, Rest Assured, Playwright, Cypress
+- UI Testing: Selenium WebDriver, Cypress, Playwright, Puppeteer
 
-1. Clean Code – Robert C. Martin (464 páginas)  
-2. Harry Potter – J.K. Rowling (309 páginas)
+## 💡 Test Data
 
-***
+### Initial Users
+- **Admin:**
+    - Email: admin@biblioteca.com
+    - Password: 123456
+- **Employee:**
+    - Email: func@biblio.com
+    - Password: 123456
+- **Student:**
+    - Email: aluna@teste.com
+    - Password: 123456
 
-## 📝 Licença e Autor
+⸻
 
-Projeto de código aberto para fins educacionais.
+### Initial Books
+	1.	Clean Code – Robert C. Martin (464 pages)
+	2.	Harry Potter – J.K. Rowling (309 pages)
 
-**Autor:** Bruno Figueiredo  
-- GitHub: [@brunonf15](https://github.com/brunonf15)  
-- LinkedIn: [Bruno Figueiredo](https://www.linkedin.com/in/brunonascimento15/)
+## 📝 License & Author
 
-***
+Open-source project created for educational and testing purposes by: 
+- Author: Bruno Figueiredo
+    - GitHub: @brunonf15￼
+    - LinkedIn: Bruno Figueiredo￼
 
-Se esse projeto ajudar nos seus estudos ou testes, considere dar uma ⭐ no GitHub!
+Automated tests created by: 
+- Author: Daniela Fernandes
+    - GitHub: @danielasimoesfernandes
+    - LinkedIn: https://www.linkedin.com/in/danielafernandes20/
+
+## 🧪 Note for Test Automation Projects
+
+This project served as the base application for building and validating automated API and UI test suites, focusing on real-world scenarios, role-based access control, and maintainable test design.
