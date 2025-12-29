@@ -1,14 +1,16 @@
 export class AuthenticationService {
     constructor(request) {
         this.request = request;
-    }
+    };
 
+    // Register a new user with given details
     async register({ nome, email, senha }) {
         return await this.request.post('/registro', {
             data: { nome, email, senha }
         });
     };
 
+    // Register a test user with random details for testing
     async registerTestUser() {
         return await this.request.post('/registro', {
             data: {
@@ -19,6 +21,7 @@ export class AuthenticationService {
         });
     };
 
+    // Login user with given credentials
     async login({ email, senha }) {
         return await this.request.post('/login', {
             data: { email, senha }
@@ -43,5 +46,4 @@ export class AuthenticationService {
             data: { email: "aluna@teste.com", senha: "123456" }
         });
     };
-
-}
+};

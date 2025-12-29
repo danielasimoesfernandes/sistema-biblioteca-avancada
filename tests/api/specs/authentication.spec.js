@@ -20,7 +20,6 @@ test.describe('Autentication - Registration', () => {
 
         // Validate the response status
         expect(response.status()).toBe(201);
-
         const newUser = await response.json();
 
         // Validate the message
@@ -44,10 +43,9 @@ test.describe('Autentication - Registration', () => {
 
     test('CT-API-002 - Registration with Duplicate Email (Failure)', async ({ request }) => {
 
-        // Preconditions: email admin@biblioteca.com is already registered in the system.
-
         const autenticationService = new AuthenticationService(request);
 
+        // This email is already registered in the system
         // Input data for user creation 
         const body = {
             nome: "João Santos",
@@ -60,17 +58,14 @@ test.describe('Autentication - Registration', () => {
 
         // Validate the response status
         expect(response.status()).toBe(400);
-
         const alreadyRegisteredUser = await response.json();
 
         // Validate the message
         expect(alreadyRegisteredUser).toHaveProperty('mensagem', 'Email já cadastrado');
-
         console.log(alreadyRegisteredUser);
     });
 });
 
-//////////////////////////////////////////////////////////////
 
 test.describe('Autentication - Login', () => {
     test('CT-API-003 - Login with Valid Credentials (Admin)', async ({ request }) => {
@@ -109,18 +104,17 @@ test.describe('Autentication - Login', () => {
 
         const autenticationService = new AuthenticationService(request);
 
-        // Input data for user creation 
+        // Invalid input data for user creation (wrong password)
         const body = {
             email: "admin@biblioteca.com",
             senha: "senhaerrada"
         };
 
         // POST request to the /login endpoint
-            const response = await request.post('/login', { data: body });
+        const response = await request.post('/login', { data: body });
 
         // Validate the response status
         expect(response.status()).toBe(401);
-
         const invalidUsed = await response.json();
 
         // Validate the message

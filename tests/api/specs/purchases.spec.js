@@ -16,7 +16,7 @@ test.describe('Create Purchases', () => {
         const booksService = new BooksService(request);
 
         // Create a book to be used in purchase tests
-        const createBookResponse = await bookFactory.createBookForPurchasesTest();
+        const createBookResponse = await bookFactory.createBookTest();
         expect(createBookResponse.status()).toBe(201);
         const newBookForPurchase = await createBookResponse.json();
         const bookId = newBookForPurchase.id;
@@ -69,7 +69,7 @@ test.describe('Create Purchases', () => {
         const booksService = new BooksService(request);
 
         // Create a book to be used in purchase tests
-        const createBookResponse = await bookFactory.createBookForPurchasesTest();
+        const createBookResponse = await bookFactory.createBookTest();
         const newBookForPurchase = await createBookResponse.json();
         const bookId = newBookForPurchase.id;
 
@@ -109,7 +109,7 @@ test.describe('Update Purchases Status', () => {
         const booksService = new BooksService(request);
 
         // Create a book to be used in purchase tests
-        const createBookResponse = await bookFactory.createBookForPurchasesTest();
+        const createBookResponse = await bookFactory.createBookTest();
         expect(createBookResponse.status()).toBe(201);
         const newBookForPurchase = await createBookResponse.json();
         const bookId = newBookForPurchase.id;
@@ -179,7 +179,7 @@ test.describe('Update Purchases Status', () => {
         const booksService = new BooksService(request);
 
         // Create a book to be used in purchase tests
-        const createBookResponse = await bookFactory.createBookForPurchasesTest();
+        const createBookResponse = await bookFactory.createBookTest();
         const newBookForPurchase = await createBookResponse.json();
         const bookId = newBookForPurchase.id;
 
@@ -247,7 +247,7 @@ test.describe('List ans Search Purchases', () => {
         // Create multiple purchases for the user
         for (let i = 0; i < 3; i++) {
             // Create book for purchase test
-            const bookForPurchaseResponse = await bookFactory.createBookForPurchasesTest();
+            const bookForPurchaseResponse = await bookFactory.createBookTest();
             expect(bookForPurchaseResponse.status()).toBe(201);
             const bookForPurchase = await bookForPurchaseResponse.json();
             const bookId = bookForPurchase.id;

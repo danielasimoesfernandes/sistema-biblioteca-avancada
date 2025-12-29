@@ -11,11 +11,13 @@ export class RentalsPage {
         this.rentalBooksGrid = page.locator('#lista-arrendamentos .book-card');
     };
 
+    // Verify rentals page title
     async verifyRentalsTitle() {
         await expect(this.rentalsPageTitle).toBeVisible();
         await expect(this.page).toHaveURL(/arrendamentos\.html$/);
     };
 
+    // Request new rental
     async requestNewRental(bookTitle, startDate, endDate) {
         // Wait for the book to be available in the dropdown
         await this.selectBookDropdown.click();
@@ -25,6 +27,7 @@ export class RentalsPage {
         await this.requestRentalButton.click();
     };
 
+    // Verify rented book list
     async verifyRentedBookInList(bookID, status) {
         await this.page.reload({ waitUntil: 'networkidle' });
         const rentedBook = this.page.locator('.book-card', { hasText: new RegExp(`Livro ID: ${bookID}`) });
@@ -33,12 +36,13 @@ export class RentalsPage {
         await expect(rentedBookStatus).toBeVisible({ timeout: 10000 });
     };
 
+    // Get rental info by id
     async getRentalIdByBookId(bookId) {
         // Locate the card with the specific book ID
         const cardTitle = this.page.locator('.book-card', { hasText: `Livro ID: ${bookId}` })
             .locator('h3'); //  And the rental ID is in the h3 element within the card
-            const text = await cardTitle.innerText(); // Ex: "Arrendamento #25"
-            // Extract the rental ID number from the text
+        const text = await cardTitle.innerText(); // Ex: "Arrendamento #25"
+        // Extract the rental ID number from the text
         const rentalId = text.replace(/\D/g, "");
         return rentalId;
     };

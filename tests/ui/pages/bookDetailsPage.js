@@ -17,14 +17,15 @@ export class BooksDetailsPage {
         this.goBackButton = page.locator('.action-buttons button', { hasText: '← Voltar' });
     };
 
+    // Verify books details page title
     async verifyBooksDetailsTitle(id) {
         await expect(this.booksDetailsPageTitle).toBeVisible();
         if (id) {
-            // O .? serve para escapar o ponto e a interrogação corretamente
             await expect(this.page).toHaveURL(new RegExp(`detalhes\\.html\\?id=${id}`));
         }
     };
 
+    // Verify book details
     async verifyBookDetails(expectedBook) {
         await expect(this.bookDetailsContainer).toBeVisible();
         await expect(this.bookImage).toHaveAttribute('src', expectedBook.urlImage);
@@ -38,18 +39,22 @@ export class BooksDetailsPage {
         await expect(this.goBackButton).toBeVisible();
     };
 
+    // Add book to favorites
     async addBookToFavorites() {
         await this.favoriteButton.click();
     };
 
-    async removeBookFromFavorites() {   
+    // Remove book from favorites
+    async removeBookFromFavorites() {
         await this.removeFavoriteButton.click();
     };
 
+    // Delete book
     async deleteBook() {
         await this.deleteButton.click();
     };
-    
+
+    // Go back to books page
     async goBackToBooksPage() {
         await this.goBackButton.click();
     };

@@ -10,12 +10,10 @@ test.describe('Book Rentals', () => {
 
     test('CT-API-018 - Valid book rental', async ({ request }) => {
 
-        const bookrentalsService = new BookrentalsService(request);
-        const booksService = new BooksService(request);
         const bookFactory = new BookFactory(request);
 
-        // Create book for rental test
-        const bookForRentalResponse = await bookFactory.createBookForRentalTest();
+        // Create book for rental test ussing factory
+        const bookForRentalResponse = await bookFactory.createBookTest();
         expect(bookForRentalResponse.status()).toBe(201);
         const bookForRental = await bookForRentalResponse.json();
         const bookId = bookForRental.id;
@@ -64,7 +62,7 @@ test.describe('Book Rentals', () => {
         const bookFactory = new BookFactory(request);
 
         // Create book for rental test
-        const bookForRentalResponse = await bookFactory.createBookForRentalTest();
+        const bookForRentalResponse = await bookFactory.createBookTest();
         expect(bookForRentalResponse.status()).toBe(201);
         const bookForRental = await bookForRentalResponse.json();
         const bookId = bookForRental.id;
@@ -109,7 +107,7 @@ test.describe('Book Rentals', () => {
         const bookFactory = new BookFactory(request);
 
         // Create book for rental test
-        const bookForRentalResponse = await bookFactory.createBookForRentalTest();
+        const bookForRentalResponse = await bookFactory.createBookTest();
         expect(bookForRentalResponse.status()).toBe(201);
         const bookForRental = await bookForRentalResponse.json();
         const bookId = bookForRental.id;
@@ -143,7 +141,7 @@ test.describe('Book Rentals', () => {
         expect(bookRentalResponse.status()).toBe(201);
         const rentedBook = await bookRentalResponse.json();
 
-         // Save rental id and stock after rental for later validation
+        // Save rental id and stock after rental for later validation
         const rentalId = rentedBook.id;
 
         // Input data to update rental status
@@ -170,11 +168,10 @@ test.describe('Book Rentals', () => {
     test('CT-API-021 - Update rental status to invalid status', async ({ request }) => {
 
         const bookrentalsService = new BookrentalsService(request);
-        const booksService = new BooksService(request);
         const bookFactory = new BookFactory(request);
 
         // Create book for rental test
-        const bookForRentalResponse = await bookFactory.createBookForRentalTest();
+        const bookForRentalResponse = await bookFactory.createBookTest();
         expect(bookForRentalResponse.status()).toBe(201);
         const bookForRental = await bookForRentalResponse.json();
         const bookId = bookForRental.id;
@@ -193,7 +190,7 @@ test.describe('Book Rentals', () => {
         expect(bookRentalResponse.status()).toBe(201);
         const rentedBook = await bookRentalResponse.json();
 
-         // Save rental id and stock after rental for later validation
+        // Save rental id and stock after rental for later validation
         const rentalId = rentedBook.id;
 
         // Input data to update rental status
@@ -220,18 +217,17 @@ test.describe('Book Rentals', () => {
         const booksService = new BooksService(request);
         const bookFactory = new BookFactory(request);
         const userFactory = new UserFactory(request);
-        
+
         // Create user for rental test  
-        const userForRentalResponse = await userFactory.registerTestUser();
-        const userForRental = await userForRentalResponse.json();
-        const userId = userForRental.usuario.id;
+        const userForRental = await userFactory.registerTestUser();
+        const userId = userForRental.userId;
         console.log("User ID for rental:", userId);
 
-    
+
         // Add rentals for the user
         for (let i = 0; i < 3; i++) {
             // Create book for rental test
-            const bookForRentalResponse = await bookFactory.createBookForRentalTest();
+            const bookForRentalResponse = await bookFactory.createBookTest();
             expect(bookForRentalResponse.status()).toBe(201);
             const bookForRental = await bookForRentalResponse.json();
             const bookId = bookForRental.id;
@@ -253,7 +249,7 @@ test.describe('Book Rentals', () => {
                 dataInicio: "2026-01-10",
                 dataFim: "2026-01-20"
             };
-            
+
             // POST request to the /arrendamentos endpoint to rent a book   
             const bookRentalResponse = await bookrentalsService.rentBook(bookRentalbody);
             // Validate the response status    

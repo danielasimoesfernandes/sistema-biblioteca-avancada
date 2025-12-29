@@ -48,7 +48,7 @@ test.describe('Books - Listing & Searching', () => {
     test('CT-API-006 - List all available books', async ({ request }) => {
 
         const booksService = new BooksService(request);
-        
+
         // GET request to the /livros/disponiveis endpoint
         const response = await booksService.getAvailableBooks();
 
@@ -75,8 +75,15 @@ test.describe('Books - Listing & Searching', () => {
 
         const booksService = new BooksService(request);
 
+        // Create a book to ensure it exists
+        const bookFactory = new BookFactory(request);
+        const createBookResponse = await bookFactory.createBookTest();
+        expect(createBookResponse.status()).toBe(201);
+        const createdBook = await createBookResponse.json();
+        const createdBookId = createdBook.id;
+
         // GET request to the /livros/1 endpoint, assuming book with ID 1 exists
-        const response = await booksService.getBookById(1);
+        const response = await booksService.getBookById(createdBookId);
 
         // Validate the response status
         expect(response.status()).toBe(200);
@@ -84,7 +91,7 @@ test.describe('Books - Listing & Searching', () => {
         const book = await response.json();
 
         // Validate the message
-        expect(book).toHaveProperty('id', 1);
+        expect(book).toHaveProperty('id', createdBookId);
 
         expect(book.nome).not.toBeNull();
         expect(book.autor).not.toBeNull();
@@ -96,7 +103,7 @@ test.describe('Books - Listing & Searching', () => {
     test('CT-API-008 - Search book by nonexistent ID', async ({ request }) => {
 
         const booksService = new BooksService(request);
-        
+
         // GET request to the /livros/9999 endpoint, which does not exist
         const response = await booksService.getBookById(9999);
 
@@ -118,7 +125,7 @@ test.describe('Books - Adding, Updating and Deleting', () => {
     test('CT-API-009 - Add a New Book', async ({ request }) => {
 
         const booksService = new BooksService(request);
-        
+
         // Input data for book creation 
         const body = {
             nome: "Código Limpo",
@@ -162,7 +169,6 @@ test.describe('Books - Adding, Updating and Deleting', () => {
     test('CT-API-010 - Add a New Book without Mandated Fields (Failure)', async ({ request }) => {
 
         const booksService = new BooksService(request);
-        const bookFactory = new BookFactory(request);
 
         // Input data for book creation with missing fields
         const body = {
@@ -188,6 +194,15 @@ test.describe('Books - Adding, Updating and Deleting', () => {
 
         const booksService = new BooksService(request);
 
+
+        // Create a book to ensure it exists
+        const bookFactory = new BookFactory(request);
+        const createBookResponse = await bookFactory.createBookTest();
+        expect(createBookResponse.status()).toBe(201);
+        const createdBook = await createBookResponse.json();
+        const createdBookId = createdBook.id;
+        console.log('Created book name for Update:', createdBook.nome, 'with ID:', createdBookId);
+
         // Input data for book update
         const body = {
             nome: "Clean Code - Edição Atualizada",
@@ -198,17 +213,17 @@ test.describe('Books - Adding, Updating and Deleting', () => {
             estoque: 7,
             preco: 79.9
         };
-       
+
         // PUT request to the /livros/1 endpoint
-        const response = await booksService.updateBook(1, body);
+        const response = await booksService.updateBook(createdBookId, body);
 
         // Validate the response status
         expect(response.status()).toBe(200);
 
         const updatedBook = await response.json();
 
-        // Validate that the 'id' is generated for the new book 
-        expect(updatedBook).toHaveProperty('id', 1);
+        // Validate that the 'id' remains the same
+        expect(updatedBook).toHaveProperty('id', createdBookId);
 
         // Validate that returned fields match input data
         expect(updatedBook.nome).toBe(body.nome);
@@ -226,15 +241,15 @@ test.describe('Books - Adding, Updating and Deleting', () => {
 
         const booksService = new BooksService(request);
         const bookFactory = new BookFactory(request);
-         
 
-        // First, create a new book to ensure it exists for deletion
-        const createBookToDelete = await bookFactory.createBookTest(); 
+
+        // Create a new book to ensure it exists for deletion
+        const createBookToDelete = await bookFactory.createBookTest();
         expect(createBookToDelete.status()).toBe(201);
         const bookToDelete = await createBookToDelete.json();
         const bookId = bookToDelete.id;
 
-        // DELETE request to the /livros/2 endpoint
+        // DELETE request to the /livros/{bookId} endpoint
         const response = await booksService.deleteBook(bookId);
 
         // Validate the response status
@@ -247,7 +262,7 @@ test.describe('Books - Adding, Updating and Deleting', () => {
 
         console.log(deletedBook);
 
-        // GET request to the /livros/2 endpoint
+        // GET request to the /livros/{bookId} endpoint
         const searchResponse = await booksService.getBookById(bookId);
         expect(searchResponse.status()).toBe(404);
     });

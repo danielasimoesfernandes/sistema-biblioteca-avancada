@@ -16,7 +16,7 @@ export class LoginPage {
         await this.page.goto('/login.html');
     };
 
-    // Verify that login page is open
+    // Verify login page title
     async verifyLoginPage() {
         await expect(this.loginPageTitle).toBeVisible();
         await expect(this.page).toHaveURL(/login\.html/);

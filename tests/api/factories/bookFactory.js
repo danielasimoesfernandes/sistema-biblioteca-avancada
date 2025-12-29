@@ -1,7 +1,7 @@
 export class BookFactory {
     constructor(request) {
         this.request = request;
-    }
+    };
 
     // Create a random, fun book for testing
     async createBookTest() {
@@ -32,7 +32,7 @@ export class BookFactory {
             const textExample = ['A fun book to test.', 'A quirky adventure for testing purposes', 'A silly story to fill your test database.', 'A random tale for automated testing fun.', 'An amazing book for testing!'];
             return `${textExample[Math.floor(Math.random() * textExample.length)]}`;
         };
-
+        // Create book data
         const bookData = {
             nome: randomTitle(),
             autor: randomAuthor(),
@@ -45,47 +45,5 @@ export class BookFactory {
 
         // Send POST request to create book
         return await this.request.post('/livros', { data: bookData });
-    };
-
-    async createBookForRentalTest() {
-        return await this.request.post('/livros', {
-            data: {
-                nome: "Rental Test Book",
-                autor: "Tech Author Rentals",
-                paginas: 543,
-                descricao: "A book created to test rental functionality",
-                imagemUrl: "https://exemplo.com/imagem.jpg",
-                estoque: 5,
-                preco: 49.9
-            }
-        });
-    };
-
-    async createBookForFavoritesTest() {
-        return await this.request.post('/livros', {
-            data: {
-                nome: "Favorites Test Book",
-                autor: "Tech Author Fav",
-                paginas: 567,
-                descricao: "A book created to test favorites functionality",
-                imagemUrl: "https://exemplo.com/imagem.jpg",
-                estoque: 3,
-                preco: 69.9
-            }
-        });
-    };
-
-    async createBookForPurchasesTest() {
-        return await this.request.post('/livros', {
-            data: {
-                nome: "Purchase Test Book 4",
-                autor: "Author Pur",
-                paginas: 347,
-                descricao: "A book created to test purchase functionality - part 4",
-                imagemUrl: "https://exemplo.com/imagem.jpg",
-                estoque: 16,
-                preco: 57.0
-            }
-        });
     };
 };

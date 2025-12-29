@@ -4,8 +4,8 @@
 
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { RegistrationPage } from '../pages/RegistrationPage';
+import { LoginPage } from '../pages/loginPage';
+import { RegistrationPage } from '../pages/registrationPage';
 import { DashboardPage } from '../pages/dashboardPage';
 
 test.describe('Logout Tests', () => {
@@ -15,11 +15,11 @@ test.describe('Logout Tests', () => {
         const registrationPage = new RegistrationPage(page);
         const dashboardPage = new DashboardPage(page);
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
         // Login with admin user
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());

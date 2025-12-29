@@ -39,8 +39,14 @@ test.describe('Users - Management', () => {
 
 
     test('CT-API-030 - Update user data', async ({ request }) => {
+
         const usersService = new UsersService(request);
-        const userId = 2; // Default user type 2 = Employee
+        const userFactory = new UserFactory(request);
+
+        // Create a user to be updated
+        const newUser = await userFactory.registerTestUser();
+        const userId = newUser.userId;
+        console.log(`Created user: ${newUser.fullName}, with email ${newUser.email} and user ID ${newUser.userId} `);
 
         const updatedData = {
             nome: "João Atualizado", // "João Funcionário",
@@ -56,14 +62,12 @@ test.describe('Users - Management', () => {
 
 
     test('CT-API-030 - Delete non admin user', async ({ request }) => {
-        const usersService = new UsersService(request); 
+        const usersService = new UsersService(request);
         const userFactory = new UserFactory(request)
 
         // Create a new user to ensure a deletable user exists
-        const newUserResponse = await userFactory.registerTestUser();
-        expect(newUserResponse.status()).toBe(201);
-        const newUser = await newUserResponse.json();
-        const newUserId = newUser.usuario.id;
+        const newUser = await userFactory.registerTestUser();
+        const newUserId = newUser.userId;
         console.log(`New user created with ID ${newUserId} for deletion test.`);
 
         // Delete the newly created user
@@ -84,7 +88,7 @@ test.describe('Users - Management', () => {
         expect(deleteUserResponse.status()).toBe(403);
         const adminNoDeletdeUser = await deleteUserResponse.json();
         expect(adminNoDeletdeUser).toHaveProperty('mensagem', 'Admin principal não pode ser deletado');
-    
+
         console.log(adminNoDeletdeUser);
     });
 });

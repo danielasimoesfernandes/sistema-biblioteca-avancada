@@ -62,12 +62,13 @@ export class AdminUsersPage {
         };
     }
 
-
+    // Verify admin user page title
     async verifyAdminUsersTitle() {
         await expect(this.adminUsersPageTitle).toBeVisible();
         await expect(this.page).toHaveURL(/admin-usuarios\.html$/);
     };
 
+    // Register new user
     async registerNewUser(tipo = 'Aluno') { // e.g., 'Administrador', 'Funcionário', 'Aluno'
         const data = this.generateRandomUserDate();
 
@@ -75,42 +76,12 @@ export class AdminUsersPage {
         await this.email.fill(data.emailComplete);
         await this.password.fill(data.password);
         // If nothing is written, default is 'Aluno'
-        await this.type.selectOption(tipo); 
-        await this.createUserButton.click();
-        return data;
-    };
-    async registerNewUserAdmin() {
-        const data = this.generateRandomUserDate();
-        await this.name.fill(data.fullName);
-        await this.email.fill(data.emailComplete);
-        await this.password.fill(data.password);
-        await this.type.selectOption('Administrador'); // e.g., 'Administrador', 'Funcionário'
+        await this.type.selectOption(tipo);
         await this.createUserButton.click();
         return data;
     };
 
-    async registerNewUserEmployee() {
-        const data = this.generateRandomUserDate();
-        await this.name.fill(data.fullName);
-        await this.email.fill(data.emailComplete);
-        await this.password.fill(data.password);
-        await this.type.selectOption('Funcionário'); // e.g., 'Administrador', 'Funcionário'
-        await this.createUserButton.click();
-        return data;
-    };
-
-    // async verifyUsersDataInTable(name, email, type, id = null) {
-    //     await this.page.reload();
-    //     // Find the email input that has exactly the value of the email parameter
-    //     const emailInput = this.page.locator(`input[value="${email}"]`);
-    //     await expect(emailInput).toBeVisible({ timeout: 10000 });
-    //     // Find the row containing that email input and verify other fields
-    //     const row = this.page.locator('tr').filter({ has: emailInput });
-    //     await expect(row.locator('input[data-campo="nome"]')).toHaveValue(name);
-
-    //     console.log(`Success: The ${name} was found in the table.`);
-    // };
-
+    // Verify users in Users table list
     async verifyUsersDataInTable(name, email, type, id, shouldExist = true) {
         await this.page.reload();
         // Find the row with the specific ID
@@ -129,6 +100,7 @@ export class AdminUsersPage {
         };
     };
 
+    // Get users info by email
     async getUserIdByEmail(email) {
         // Locate the input that has the email value
         const emailInput = this.page.locator(`input[value="${email}"]`);
@@ -139,19 +111,22 @@ export class AdminUsersPage {
         return idText.trim();
     };
 
+    // Edit user from Users list 
     async editUserInTable(id, { name, email, type }) {
         await this.nameInputTable(id).fill(name);
         await this.emailInputTable(id).fill(email);
-        await this.selectType(id).selectOption(type);   
+        await this.selectType(id).selectOption(type);
         await this.saveButton(id).click();
     };
 
+    // Delete user from Users list 
     async deleteUserInTable(id) {
         await this.deleteButton(id).click();
     };
 
+    // Add user form and users table list are visible
     async pageContentIsVisible() {
         await expect(this.adminUsersForm).toBeVisible();
         await expect(this.adminUsersTable).toBeVisible();
-    }
+    };
 };

@@ -3,7 +3,7 @@
 ////////////////////////////////////////
 
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
+import { LoginPage } from '../pages/loginPage';
 import { DashboardPage } from '../pages/dashboardPage';
 import { RentalsPage } from '../pages/rentalsPage';
 import { BookFactory } from '../../api/factories/bookFactory';
@@ -16,7 +16,7 @@ test.describe('Rentals tests', () => {
         const loginPage = new LoginPage(page);
         const dashboardPage = new DashboardPage(page);
         const rentalsPage = new RentalsPage(page);
-        //API request
+        // API request
         const bookFactory = new BookFactory(request);
         const userFactory = new UserFactory(request);
 
@@ -32,8 +32,8 @@ test.describe('Rentals tests', () => {
         console.log(`Created book: ${book.nome} by ${book.autor}`); // Log book info
         const fullBookTitle = `${book.nome} (${book.autor})`;
         const bookId = book.id;
-
-        //Open login page
+ 
+        // Open login page
         await loginPage.goToWebsite();
 
         // Accept dialog and log in with student user
@@ -46,7 +46,7 @@ test.describe('Rentals tests', () => {
             await loginPage.logIn({ email, password })
         ]);
 
-        //Access rentals menu 
+        // Access rentals menu 
         await dashboardPage.clickOnMenu(dashboardPage.myRentalsMenuButton);
         await rentalsPage.verifyRentalsTitle();
 
@@ -82,7 +82,7 @@ test.describe('Rentals tests', () => {
         const dashboardPage = new DashboardPage(page);
         const rentalsPage = new RentalsPage(page);
         const approvalsPage = new ApprovalsPage(page);
-        //API request
+        // API request
         const bookFactory = new BookFactory(request);
         const userFactory = new UserFactory(request);
 
@@ -99,7 +99,7 @@ test.describe('Rentals tests', () => {
         const fullBookTitle = `${book.nome} (${book.autor})`;
         const bookId = book.id;
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
         // Accept dialog and log in with student user
@@ -112,7 +112,7 @@ test.describe('Rentals tests', () => {
             await loginPage.logIn({ email, password })
         ]);
 
-        //Access rentals menu 
+        // Access rentals menu 
         await dashboardPage.clickOnMenu(dashboardPage.myRentalsMenuButton);
         await rentalsPage.verifyRentalsTitle();
 
@@ -154,7 +154,7 @@ test.describe('Rentals tests', () => {
             await loginPage.logInEmployeeUser()
         ]);
 
-        //Access aprovals menu 
+        // Access aprovals menu 
         await dashboardPage.clickOnMenu(dashboardPage.approvalsMenuButton);
         await approvalsPage.verifyApprovalsTitle();
 
@@ -189,7 +189,7 @@ test.describe('Rentals tests', () => {
         const dashboardPage = new DashboardPage(page);
         const rentalsPage = new RentalsPage(page);
         const approvalsPage = new ApprovalsPage(page);
-        //API request
+        // API request
         const bookFactory = new BookFactory(request);
         const userFactory = new UserFactory(request);
 
@@ -219,7 +219,7 @@ test.describe('Rentals tests', () => {
             await loginPage.logIn({ email, password })
         ]);
 
-        //Access rentals menu 
+        // Access rentals menu 
         await dashboardPage.clickOnMenu(dashboardPage.myRentalsMenuButton);
         await rentalsPage.verifyRentalsTitle();
 
@@ -261,7 +261,7 @@ test.describe('Rentals tests', () => {
             await loginPage.logInEmployeeUser()
         ]);
 
-        //Access aprovals menu 
+        // Access aprovals menu 
         await dashboardPage.clickOnMenu(dashboardPage.approvalsMenuButton);
         await approvalsPage.verifyApprovalsTitle();
 

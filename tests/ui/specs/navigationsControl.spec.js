@@ -4,7 +4,7 @@
 
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
+import { LoginPage } from '../pages/loginPage';
 import { DashboardPage } from '../pages/dashboardPage';
 
 test.describe('Navigation Control', () => {
@@ -34,7 +34,7 @@ test.describe('Navigation Control', () => {
         const loginPage = new LoginPage(page);
         const dashboardPage = new DashboardPage(page);
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
         // Accept dialog 

@@ -4,8 +4,8 @@
 
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { RegistrationPage } from '../pages/RegistrationPage';
+import { LoginPage } from '../pages/loginPage';
+import { RegistrationPage } from '../pages/registrationPage';
 import { DashboardPage } from '../pages/dashboardPage';
 
 
@@ -155,7 +155,7 @@ test.describe('Login and Registration Tests', () => {
                 expect(dialog.message()).toBe('Email ou senha incorretos');
                 await dialog.accept();
             }),
-            //Login user
+            // Login user
             await loginPage.logIn(user)
         ]);
 

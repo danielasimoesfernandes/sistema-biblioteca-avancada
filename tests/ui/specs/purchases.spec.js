@@ -3,7 +3,7 @@
 ////////////////////////////////////////
 
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
+import { LoginPage } from '../pages/loginPage';
 import { DashboardPage } from '../pages/dashboardPage';
 import { RentalsPage } from '../pages/rentalsPage';
 import { BookFactory } from '../../api/factories/bookFactory';
@@ -20,7 +20,7 @@ test.describe('Purchases tests', () => {
         const rentalsPage = new RentalsPage(page);
         const purchasesPage = new PurchasesPage(page);
         const booksPage = new BooksPage(page);
-        //API request
+        // API request
         const bookFactory = new BookFactory(request);
         const userFactory = new UserFactory(request);
 
@@ -116,7 +116,7 @@ test.describe('Purchases tests', () => {
         const rentalsPage = new RentalsPage(page);
         const purchasesPage = new PurchasesPage(page);
         const booksPage = new BooksPage(page);
-        //API request
+        // API request
         const bookFactory = new BookFactory(request);
         const userFactory = new UserFactory(request);
 
@@ -134,7 +134,7 @@ test.describe('Purchases tests', () => {
         const bookAuthor = book.autor;
         const bookId = book.id;
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
         // Accept dialog and log in with user

@@ -25,7 +25,7 @@ export class DashboardPage {
         this.studentsCard = page.locator('.stat-card', { hasText: 'Alunos' });
         this.employeesCard = page.locator('.stat-card', { hasText: 'Funcionários' });
         this.adminsCard = page.locator('.stat-card', { hasText: 'Administradores' });
-        this.registeredStudents = page.locator('.stat-card', { hasText: 'Alunos Cadastrados'});
+        this.registeredStudents = page.locator('.stat-card', { hasText: 'Alunos Cadastrados' });
         // Books grid
         this.availableBooksGrid = page.locator('.books-grid .book-card');
     };
@@ -38,11 +38,13 @@ export class DashboardPage {
         return await this.username.isVisible();
     };
 
+    // Verify dashboard page title
     async verifyDashboardTitle() {
         await expect(this.dashboardPageTitle).toBeVisible();
         await expect(this.page).toHaveURL(/dashboard\.html$/);
     };
 
+    // Validate user info from localStorage
     async verifyUserInLocalStorage(expectedEmail, expectedId, expectedName, expectedTipo) {
         const savedUser = await this.page.evaluate(() => JSON.parse(localStorage.getItem('usuario')));
         expect(savedUser).not.toBeNull();
@@ -52,6 +54,7 @@ export class DashboardPage {
         expect(savedUser.tipo).toBe(expectedTipo);
     };
 
+    // Verify that all stats for admin are visble
     async verifyAllStatsCardsVisibleForAdmin() {
         await expect(this.statsGrid).toBeVisible();
 
@@ -63,6 +66,7 @@ export class DashboardPage {
         await expect(this.adminsCard).toBeVisible();
     };
 
+    // Verify that all stats for student are visble
     async verifyAllStatsCardsVisibleForStudent() {
         await expect(this.statsGrid).toBeVisible();
 
@@ -71,15 +75,18 @@ export class DashboardPage {
         await expect(this.registeredStudents).toBeVisible();
     };
 
+    // Get stats value from a card
     async getStatValue(cardLocator) {
         const valueText = await cardLocator.locator('.number').textContent();
         return Number(valueText?.trim());
     };
 
+    // Click on a menu option
     async clickOnMenu(menuButton) {
         await menuButton.click();
     };
 
+    // Log out
     async logout() {
         await this.logoutButton.click();
     };

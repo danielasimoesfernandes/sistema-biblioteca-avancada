@@ -14,17 +14,19 @@ export class BooksPage {
         this.addBookButton = page.locator('button[type="submit"]', { hasText: 'Adicionar Livro' });
         this.deleteButton = page.locator('button[class="btn btn-danger"]', { hasText: '🗑️ Deletar Livro' })
         // Function to locate a book card by title and author
-        this.bookCard = (title, author) => 
+        this.bookCard = (title, author) =>
             this.page.locator('.book-card')
                 .filter({ hasText: title })
                 .filter({ hasText: author });
     }
 
+    // Verify books page title
     async verifyBooksTitle() {
         await expect(this.booksPageTitle).toBeVisible();
         await expect(this.page).toHaveURL(/livros\.html$/);
     };
 
+    // Add a book with given info
     async fillFormToAddBook(book) {
         await this.bookNameField.fill(book.bookName);
         await this.authorNameField.fill(book.authorName);
@@ -36,6 +38,7 @@ export class BooksPage {
         await this.addBookButton.click();
     };
 
+    // Validate info after submitting
     async validatAddBookFieldsAfterSubmit() {
         await expect(this.bookNameField).toBeEmpty();
         await expect(this.authorNameField).toBeEmpty();
@@ -46,14 +49,17 @@ export class BooksPage {
         await expect(this.priceField).toHaveValue('0');
     };
 
+    // Get book by title
     getBookByTitle(title) {
         return this.page.locator('.book-card', { hasText: title });
     };
 
+    // Click on a book card
     async clickOnBookCard(bookCard) {
         await bookCard.click()
     };
 
+    // Validate book info card
     async verifyBookInfoInCard(bookCard, book) {
         await expect(bookCard.locator('h3', { hasText: book.nome })).toBeVisible();
         await expect(bookCard.locator('p', { hasText: `Autor: ${book.autor}` })).toBeVisible();

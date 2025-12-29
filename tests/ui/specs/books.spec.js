@@ -4,7 +4,7 @@
  
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
+import { LoginPage } from '../pages/loginPage';
 import { DashboardPage } from '../pages/dashboardPage';
 import { BooksPage } from '../pages/booksPage';
 import { BooksService } from '../../api/services/booksService';
@@ -22,7 +22,7 @@ test.describe('Book Tests', () => {
         // @ts-ignore
         const booksService = new BooksService(request);
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
         // Accept dialog 
@@ -36,17 +36,16 @@ test.describe('Book Tests', () => {
             await loginPage.logInAdminUser()
         ]);
 
-        //Access dashboard
+        // Access dashboard
         await dashboardPage.verifyDashboardTitle();
 
-        //Go to Books menu
+        // Go to Books menu
         await dashboardPage.clickOnMenu(dashboardPage.booksMenuButton);
         await booksPage.verifyBooksTitle();
 
-
         const uniqueId = Math.floor(Math.random() * 100);
 
-        //Fill form to add a book 
+        // Fill form to add a book 
         const book = {
             bookName: `O Hobbit ${uniqueId}`,
             authorName: "J.R.R. Tolkien",
@@ -69,10 +68,10 @@ test.describe('Book Tests', () => {
             console.log(book)
         ]);
 
-        //Validate fields are empty 
+        // Validate fields are empty 
         await booksPage.validatAddBookFieldsAfterSubmit();
-
-        //Click in books menu again to check if new book is there
+ 
+        // Click in books menu again to check if new book is there
         await dashboardPage.clickOnMenu(dashboardPage.booksMenuButton);
         await booksPage.verifyBooksTitle();
 
@@ -94,10 +93,10 @@ test.describe('Book Tests', () => {
         const dashboardPage = new DashboardPage(page);
         const booksPage = new BooksPage(page)
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());
@@ -108,11 +107,11 @@ test.describe('Book Tests', () => {
             await loginPage.logInAdminUser()
         ]);
 
-        //Acces books menu 
+        // Acces books menu 
         await dashboardPage.clickOnMenu(dashboardPage.booksMenuButton);
         await booksPage.verifyBooksTitle();
 
-        //Fill form to add a book 
+        // Fill form to add a book 
         // @ts-ignore
         const book = {
             bookName: "",
@@ -160,7 +159,7 @@ test.describe('Book Tests', () => {
         const booksPage = new BooksPage(page);
         const booksDetailsPage = new BooksDetailsPage(page);
 
-        //API request
+        // API request
         const bookFactory = new BookFactory(request);
 
         // Use API to create more book
@@ -169,10 +168,10 @@ test.describe('Book Tests', () => {
         const book = await response.json();
         console.log(`Created book: ${book.nome} by ${book.autor}`); // Log book info
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());
@@ -183,7 +182,7 @@ test.describe('Book Tests', () => {
             await loginPage.logInStudentUser()
         ]);
 
-        //Access books menu 
+        // Access books menu 
         await dashboardPage.clickOnMenu(dashboardPage.booksMenuButton);
         await page.reload();
         await booksPage.verifyBooksTitle();

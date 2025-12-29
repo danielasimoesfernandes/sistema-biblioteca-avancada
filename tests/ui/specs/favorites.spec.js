@@ -4,7 +4,7 @@
 
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
+import { LoginPage } from '../pages/loginPage';
 import { DashboardPage } from '../pages/dashboardPage';
 import { BooksPage } from '../pages/booksPage';
 import { BooksDetailsPage } from '../pages/bookDetailsPage';
@@ -21,7 +21,7 @@ test.describe('Favorites Tests', () => {
         const booksPage = new BooksPage(page);
         const bookDetailsPage = new BooksDetailsPage(page);
         const favoritesPage = new FavoritesPage(page);
-        //API request
+        // API request
         const bookFactory = new BookFactory(request);
 
         // Use API to create more book
@@ -30,7 +30,7 @@ test.describe('Favorites Tests', () => {
         const book = await response.json();
         console.log(`Created book: ${book.nome} by ${book.autor}`); // Log book info
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
         // Accept dialog and log in with student user
@@ -43,14 +43,15 @@ test.describe('Favorites Tests', () => {
             await loginPage.logInStudentUser()
         ]);
 
-        //Access books menu 
+        // Access books menu 
         await dashboardPage.clickOnMenu(dashboardPage.booksMenuButton);
         
         await booksPage.verifyBooksTitle();
 
-        // Clicar no card do livro criado
+        // Click on the created book card
         const bookCard = booksPage.getBookByTitle(book.nome).first();
         await bookCard.click();
+        await page.reload();
 
         // Add book to favorites
         await bookDetailsPage.verifyBooksDetailsTitle(book.id);
@@ -99,7 +100,7 @@ test.describe('Favorites Tests', () => {
         const bookID = book.id;
         console.log(`Created book: ${book.nome} by ${book.autor}`); // Log book info
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
         // Accept dialog and log in with student user
@@ -112,12 +113,12 @@ test.describe('Favorites Tests', () => {
             await loginPage.logInStudentUser()
         ]);
 
-        //Access books menu 
+        // Access books menu 
         await dashboardPage.clickOnMenu(dashboardPage.booksMenuButton);
         await page.reload();    
         await booksPage.verifyBooksTitle();
 
-        // Clicar no card do livro criado
+        // Click on the created book card
         const bookCard = booksPage.getBookByTitle(book.nome).first();
         await bookCard.click();
 
@@ -173,7 +174,7 @@ test.describe('Favorites Tests', () => {
         const dashboardPage = new DashboardPage(page);
         const favoritesPage = new FavoritesPage(page);
         const bookDetailsPage = new BooksDetailsPage(page);
-        //API request
+        // API request
         const bookFactory = new BookFactory(request);
         const favoritesService = new FavoritesService(request);
         const userFactory = new UserFactory(request);

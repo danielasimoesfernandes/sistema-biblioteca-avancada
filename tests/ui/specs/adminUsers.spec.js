@@ -4,7 +4,7 @@
 
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
+import { LoginPage } from '../pages/loginPage';
 import { DashboardPage } from '../pages/dashboardPage';
 import { AdminUsersPage } from '../pages/adminUsersPage';
 import id from 'faker/lib/locales/id_ID';
@@ -17,11 +17,11 @@ test.describe('Admin Users Management', () => {
         const dashboardPage = new DashboardPage(page);
         const adminUsersPage = new AdminUsersPage(page);
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
         // Log in with student user to verify access is blocked
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());
@@ -40,7 +40,7 @@ test.describe('Admin Users Management', () => {
         await expect(adminBlockedArea).toContainText('Somente administradores podem acessar esta página.');
         console.log('Access to Admin Users menu blocked for non-admin user as expected.');
 
-        //Open login page again
+        // Open login page again
         await loginPage.goToWebsite();
 
         /// Accept dialog 
@@ -54,11 +54,11 @@ test.describe('Admin Users Management', () => {
             await loginPage.logInAdminUser()
         ]);
 
-        //Access Admin Users menu 
+        // Access Admin Users menu 
         await dashboardPage.clickOnMenu(dashboardPage.usersMenuButton);
         await adminUsersPage.verifyAdminUsersTitle();
 
-        //Verify page content is visible
+        // Verify page content is visible
         await adminUsersPage.pageContentIsVisible();
         console.log('All content in Admin Users page is visible as expected.');
 
@@ -70,10 +70,10 @@ test.describe('Admin Users Management', () => {
         const dashboardPage = new DashboardPage(page);
         const adminUsersPage = new AdminUsersPage(page);
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());
@@ -84,20 +84,20 @@ test.describe('Admin Users Management', () => {
             await loginPage.logInAdminUser()
         ]);
 
-        //Access Admin Users menu 
+        // Access Admin Users menu 
         await dashboardPage.clickOnMenu(dashboardPage.usersMenuButton);
         await adminUsersPage.verifyAdminUsersTitle();
 
         let newUser;
 
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());
                 expect(dialog.message()).toBe('Usuário criado com sucesso!');
                 await dialog.accept();
             }),
-            //Register new user - Employee
+            // Register new user - Employee
             newUser = await adminUsersPage.registerNewUser('Funcionário')
         ]);
 
@@ -115,10 +115,10 @@ test.describe('Admin Users Management', () => {
         const dashboardPage = new DashboardPage(page);
         const adminUsersPage = new AdminUsersPage(page);
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());
@@ -129,20 +129,20 @@ test.describe('Admin Users Management', () => {
             await loginPage.logInAdminUser()
         ]);
 
-        //Access Admin Users menu 
+        // Access Admin Users menu 
         await dashboardPage.clickOnMenu(dashboardPage.usersMenuButton);
         await adminUsersPage.verifyAdminUsersTitle();
 
         let newUser;
 
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());
                 expect(dialog.message()).toBe('Usuário criado com sucesso!');
                 await dialog.accept();
             }),
-            //Register new user - Employee
+            // Register new user - Employee
             newUser = await adminUsersPage.registerNewUser('Funcionário')
         ]);
 
@@ -172,10 +172,10 @@ test.describe('Admin Users Management', () => {
         const dashboardPage = new DashboardPage(page);
         const adminUsersPage = new AdminUsersPage(page);
 
-        //Open login page
+        // Open login page
         await loginPage.goToWebsite();
 
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());
@@ -186,20 +186,20 @@ test.describe('Admin Users Management', () => {
             await loginPage.logInAdminUser()
         ]);
 
-        //Access Admin Users menu 
+        // Access Admin Users menu 
         await dashboardPage.clickOnMenu(dashboardPage.usersMenuButton);
         await adminUsersPage.verifyAdminUsersTitle();
 
         let newUser;
 
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());
                 expect(dialog.message()).toBe('Usuário criado com sucesso!');
                 await dialog.accept();
             }),
-            //Register new user - Employee
+            // Register new user - Employee
             newUser = await adminUsersPage.registerNewUser('Funcionário')
         ]);
 
@@ -212,7 +212,7 @@ test.describe('Admin Users Management', () => {
         await adminUsersPage.verifyUsersDataInTable(newUser.fullName, newUser.emailComplete, 'Funcionário', userId);
 
         // Remove user
-        /// Accept dialog 
+        // Accept dialog 
         await Promise.all([
             page.waitForEvent('dialog').then(async dialog => {
                 console.log('Dialog:', dialog.message());

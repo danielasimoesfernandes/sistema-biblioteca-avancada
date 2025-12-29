@@ -8,17 +8,20 @@ export class FavoritesPage {
         this.favoriteBooksGrid = page.locator('.favorites-grid .book-card');
     };
 
+    // Verify favorites page title
     async verifyFavoritesTitle() {
         await expect(this.favoritesPageTitle).toBeVisible();
         await expect(this.page).toHaveURL(/favoritos\.html$/);
     };
 
+    // Verify "no favorites" message when there's no favorites added
     async verifyNoFavoritesMessage() {
         await this.noFavoritesMessage.waitFor({ state: 'visible', timeout: 5000 });
         await expect(this.noFavoritesMessage).toBeVisible();
         await expect(this.noFavoritesMessage).toContainText('Você ainda não tem livros favoritos');
     };
 
+    // Get favorite info
     getFavoriteBook(bookName, author, pages) {
         return this.page.locator('.book-card').filter({
             hasText: bookName

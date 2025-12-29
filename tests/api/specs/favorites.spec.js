@@ -2,31 +2,37 @@
 import { test, expect } from '@playwright/test';
 import { FavoritesService } from '../services/favoritesServices.js';
 import { BookFactory } from '../factories/bookFactory.js';
+import { UserFactory } from '../factories/userFactory.js';
 import { fa } from 'faker/lib/locales.js';
 
 
 test.describe('Favorites Management', () => {
-    
+
     test('CT-API-014 - Add a book to favorites', async ({ request }) => {
 
         const favoritesService = new FavoritesService(request);
         const bookFactory = new BookFactory(request);
+        const userFactory = new UserFactory(request);
 
-        // First, create a new book to ensure it exists for adding to favorites
-        const createBookResponse = await bookFactory.createBookForFavoritesTest();
+        // Create a new user to ensure it exists for adding favorites
+        const newUserForFavorites = await userFactory.registerTestUser();
+        const newUserId = newUserForFavorites.userId;
+
+        // Create a new book to ensure it exists for adding to favorites
+        const createBookResponse = await bookFactory.createBookTest();
         expect(createBookResponse.status()).toBe(201);
         const newBookForFavorites = await createBookResponse.json();
         const newBookId = newBookForFavorites.id;
-        
+
         // Input data to add favorite
         const body = {
-            usuarioId: 1,
+            usuarioId: newUserId,
             livroId: newBookId
         };
 
         // Add to favorites - ensure clean state
         const addFavoriteResponse = await favoritesService.addBookToFavorites(body);
-        expect([201]).toContain(addFavoriteResponse.status()); 
+        expect([201]).toContain(addFavoriteResponse.status());
 
         // DELETE request to the /favoritos endpoint to ensure clean state
         const deleteResponse = await favoritesService.removeBookFromFavorites(body);
@@ -52,14 +58,22 @@ test.describe('Favorites Management', () => {
 
         const favoritesService = new FavoritesService(request);
         const bookFactory = new BookFactory(request);
+        const userFactory = new UserFactory(request);
 
-        const userId = 1;
-        const bookId = 1; // Use existing book ID for this test
+        // Create a new user to ensure it exists for adding favorites
+        const newUserForFavorites = await userFactory.registerTestUser();
+        const newUserId = newUserForFavorites.userId;
+
+        // Create a new book to ensure it exists for adding to favorites
+        const createBookResponse = await bookFactory.createBookTest();
+        expect(createBookResponse.status()).toBe(201);
+        const newBookForFavorites = await createBookResponse.json();
+        const newBookId = newBookForFavorites.id;
 
         // Input data to add favorite
         const body = {
-            usuarioId: userId,
-            livroId: bookId
+            usuarioId: newUserId,
+            livroId: newBookId
         };
 
         // DELETE request to the /favoritos endpoint to ensure clean state
@@ -87,26 +101,29 @@ test.describe('Favorites Management', () => {
 
         const favoritesService = new FavoritesService(request);
         const bookFactory = new BookFactory(request);
+        const userFactory = new UserFactory(request);
 
-        const userId = 1;
+        // Create a new user to ensure it exists for adding favorites
+        const newUserForFavorites = await userFactory.registerTestUser();
+        const newUserId = newUserForFavorites.userId;
 
         // Add favorites for the user
         for (let i = 0; i < 3; i++) {
             // Create book for rental test
-            const bookForFavoritesResponse = await bookFactory.createBookForFavoritesTest();
+            const bookForFavoritesResponse = await bookFactory.createBookTest();
             expect(bookForFavoritesResponse.status()).toBe(201);
             const bookForFavorites = await bookForFavoritesResponse.json();
             const bookId = bookForFavorites.id;
 
             // Add to favorites - ensure clean state
-            const addFavoriteResponse = await favoritesService.addBookToFavorites({usuarioId: userId, livroId: bookId });
-            expect([201]).toContain(addFavoriteResponse.status()); 
+            const addFavoriteResponse = await favoritesService.addBookToFavorites({ usuarioId: newUserId, livroId: bookId });
+            expect([201]).toContain(addFavoriteResponse.status());
 
-            console.log(`Added book ID ${bookId} to favorites for user ID ${userId}.`);
+            console.log(`Added book ID ${bookId} to favorites for user ID ${newUserId}.`);
         };
 
         // GET request to the /favoritos/1 endpoint to get favorites for user with ID 1
-        const response = await favoritesService.getUserFavorites(userId);
+        const response = await favoritesService.getUserFavorites(newUserId);
         // Validate the response status
         expect(response.status()).toBe(200);
 
@@ -136,24 +153,29 @@ test.describe('Favorites Management', () => {
 
     test('CT-API-017 - Remove book from favorites', async ({ request }) => {
 
-         const favoritesService = new FavoritesService(request);
+        const favoritesService = new FavoritesService(request);
         const bookFactory = new BookFactory(request);
-        
-        // First, create a new book to ensure it exists for adding to favorites
-        const createBookResponse = await bookFactory.createBookForFavoritesTest();
+        const userFactory = new UserFactory(request);
+
+        // Create a new user to ensure it exists for testing
+        const newUserForFavorites = await userFactory.registerTestUser();
+        const newUserId = newUserForFavorites.userId;
+
+        // Create a new book to ensure it exists for testing
+        const createBookResponse = await bookFactory.createBookTest();
         expect(createBookResponse.status()).toBe(201);
         const newBookForFavorites = await createBookResponse.json();
         const newBookId = newBookForFavorites.id;
-        
-        // Input data to add favorite
+
+        // Input data to add and remove from favorites
         const body = {
-            usuarioId: 1,
+            usuarioId: newUserId,
             livroId: newBookId
         };
 
         // Add to favorites - ensure clean state
         const addFavoriteResponse = await favoritesService.addBookToFavorites(body);
-        expect([201]).toContain(addFavoriteResponse.status()); 
+        expect([201]).toContain(addFavoriteResponse.status());
 
         // DELETE request to the /favoritos endpoint to ensure clean state
         const deleteResponse = await favoritesService.removeBookFromFavorites(body);
