@@ -415,6 +415,13 @@ _____
 
 ***
 
+## 📎 Reference
+This project is part of the Rumos Expert Certification (CRE).
+
+Original reference repository: https://github.com/brunonf15/biblioteca-pro-max.git
+
+***
+
 ## 📝 License & Author
 
 Automated tests created by: 
